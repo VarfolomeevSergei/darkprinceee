@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёмный Принц | Официальная страница</title>
+    <!-- Подключаем Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Пользовательские стили для кнопки с эффектами */
+        #playButton:active {
+            transform: scale(0.95);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white flex items-center justify-center min-h-screen p-4">
+
+    <!-- Кнопка воспроизведения аудио -->
+        <div class="flex justify-center">
+            <button id="playButton" class="
+                bg-purple-600 hover:bg-purple-700
+                text-white text-xl font-bold
+                py-4 px-10 rounded-full
+                transition-all duration-300 ease-in-out
+                shadow-lg hover:shadow-xl
+                transform hover:scale-105
+            ">
+                Тёмный Принц
+            </button>
+        </div>
+
+        <!--
+            Аудиоэлемент, скрытый от пользователя.
+            ВАЖНО: Замените 'path/to/your-audio.mp3' на реальный путь к вашему файлу.
+            Например, если файл называется 'my_track.mp3' и находится в той же папке,
+            путь должен быть 'my_track.mp3'.
+        -->
+        <audio id="audioPlayer" src="nX8wjQK0nPer.128.mp3" preload="auto"></audio>
+
+    <!-- JavaScript для управления воспроизведением -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const playButton = document.getElementById('playButton');
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            playButton.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    audioPlayer.play()
+                        .then(() => {
+                            playButton.textContent = 'Пауза';
+                        })
+                        .catch(error => {
+                            console.error('Ошибка воспроизведения аудио:', error);
+                            // Если произошла ошибка, можно показать сообщение пользователю
+                            playButton.textContent = 'Ошибка';
+                        });
+                } else {
+                    audioPlayer.pause();
+                    playButton.textContent = 'Тёмный Принц';
+                }
+            });
+            
+            // Сброс текста кнопки после завершения воспроизведения
+            audioPlayer.addEventListener('ended', () => {
+                playButton.textContent = 'Тёмный Принц';
+            });
+        });
+    </script>
+
+</body>
+</html>
